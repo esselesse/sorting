@@ -1,5 +1,7 @@
 package ru.mail.polis.structures;
 
+import java.util.DoubleSummaryStatistics;
+
 /**
  * Created by Nechaev Mikhail
  * Since 12/11/2017.
@@ -8,15 +10,21 @@ public class SimpleInteger implements Numerical<SimpleInteger> {
 
     private static final int DIGIT_COUNT = 10;
 
-//    private final todo data;
-//    private final int length;
+    private final int data;
+    private final int length;
 
     public SimpleInteger(Integer data) throws IllegalArgumentException {
         if (data == null) {
             throw new IllegalArgumentException("Source must be not null");
         }
-//        this.data = todo
-//        this.length = todo
+        this.data = data;
+        int temp = data;
+        int tempLength = 0;
+        while (temp>0){
+            temp/=10;
+            tempLength++;
+        }
+        this.length = tempLength;
     }
 
     @Override
@@ -26,8 +34,11 @@ public class SimpleInteger implements Numerical<SimpleInteger> {
         } else if (index >= getDigitCount()) {
             return 0;
         } else {
-            //todo
-            return 0;
+            int temp = data;
+            for (int i = 0; i < index; i++) {
+                temp/=10;
+            }
+            return (int)(temp % 10);
         }
     }
 
@@ -38,12 +49,16 @@ public class SimpleInteger implements Numerical<SimpleInteger> {
 
     @Override
     public int getDigitCount() {
-        //todo
-        return 0;
+        return this.length;
     }
 
     @Override
     public int compareTo(SimpleInteger anotherSimpleInteger) {
-        return 0;
+        return Integer.compare(this.data, anotherSimpleInteger.data);
+    }
+
+    @Override
+    public String toString() {
+        return data + "";
     }
 }

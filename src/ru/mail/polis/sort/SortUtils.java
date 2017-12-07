@@ -6,6 +6,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import ru.mail.polis.structures.IntKeyObject;
 import ru.mail.polis.structures.IntKeyStringValueObject;
+import ru.mail.polis.structures.SimpleInteger;
 
 public class SortUtils {
 
@@ -33,7 +34,19 @@ public class SortUtils {
     public static int[] generateArray(int n) {
         int[] a = new int[n];
         for (int i = 0; i < a.length; i++) {
-            a[i] = i;
+            a[i] = r.nextInt();
+        }
+        for (int i = a.length - 1; i > 0; i--) {
+            int j = r.nextInt(i + 1);
+            SortUtils.swap(a, i, j);
+        }
+        return a;
+    }
+
+    public static SimpleInteger[] generateSimpleIntegerArray(int n) {
+        SimpleInteger[] a = new SimpleInteger[n];
+        for (int i = 0; i < a.length; i++) {
+            a[i] = new SimpleInteger(r.nextInt(1000));
         }
         for (int i = a.length - 1; i > 0; i--) {
             int j = r.nextInt(i + 1);
