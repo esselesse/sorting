@@ -4,6 +4,9 @@ import java.util.Comparator;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+import ru.mail.polis.structures.IntKeyObject;
+import ru.mail.polis.structures.IntKeyStringValueObject;
+
 public class SortUtils {
 
     private static final Random r = ThreadLocalRandom.current();
@@ -15,6 +18,13 @@ public class SortUtils {
     }
 
     public static <T extends Comparable<T>> void swap(T[] a, int i, int j) {
+        T x = a[i];
+        a[i] = a[j];
+        a[j] = x;
+    }
+
+
+    public static <T> void swap(T[] a, int i, int j) {
         T x = a[i];
         a[i] = a[j];
         a[j] = x;
@@ -38,6 +48,18 @@ public class SortUtils {
             array[i] = i;
         }
         for (int i = array.length - 1; i > 0; i--) {
+            int j = r.nextInt(i + 1);
+            SortUtils.swap(array, i, j);
+        }
+        return array;
+    }
+
+    public static IntKeyStringValueObject[] generateWrappedIntKeyObjectArray(int n) {
+        IntKeyStringValueObject[] array = new IntKeyStringValueObject[n];
+        for (int i = 0; i < n; i++) {
+            array[i] = new IntKeyStringValueObject(i, Integer.toString(i));
+        }
+        for (int i = n-1; i > 0; i--) {
             int j = r.nextInt(i + 1);
             SortUtils.swap(array, i, j);
         }
