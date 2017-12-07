@@ -14,6 +14,12 @@ public class SortUtils {
         a[j] = x;
     }
 
+    public static <T extends Comparable<T>> void swap(T[] a, int i, int j) {
+        T x = a[i];
+        a[i] = a[j];
+        a[j] = x;
+    }
+
     public static int[] generateArray(int n) {
         int[] a = new int[n];
         for (int i = 0; i < a.length; i++) {
@@ -24,6 +30,18 @@ public class SortUtils {
             SortUtils.swap(a, i, j);
         }
         return a;
+    }
+
+    public static Integer[] generateWrappedIntegerArray(int n) {
+        Integer[] array = new Integer[n];
+        for (int i = 0; i < array.length; i++) {
+            array[i] = i;
+        }
+        for (int i = array.length - 1; i > 0; i--) {
+            int j = r.nextInt(i + 1);
+            SortUtils.swap(array, i, j);
+        }
+        return array;
     }
 
     public static boolean isArraySorted(int[] a) {
@@ -49,4 +67,6 @@ public class SortUtils {
         }
         return isSorted;
     }
+
+
 }
