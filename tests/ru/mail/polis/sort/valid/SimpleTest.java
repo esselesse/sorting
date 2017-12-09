@@ -40,7 +40,7 @@ public class SimpleTest {
     @SuppressWarnings("unchecked")
     public void testCountingSort() throws IOException {
         CountingSort<IntKeyObject<String>> countingSort = new CountingSort<>();
-        List<IntKeyObject<String>> list = Arrays.asList(new IntKeyStringValueObject(1, "abc"), new IntKeyStringValueObject(2, "bcd"));
+        List<IntKeyObject<String>> list = Arrays.asList(new IntKeyStringValueObject(1, "abc"), new IntKeyStringValueObject(2, "bcd"), new IntKeyStringValueObject(3, "cba"));
         IntKeyObject<String>[] array = (IntKeyObject<String>[]) list.toArray();
         countingSort.sort(array);
     }

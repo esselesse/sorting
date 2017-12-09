@@ -33,7 +33,7 @@ public class SimpleString implements Numerical<SimpleString> {
         } else if (index >= getDigitCount()) {
             return MIN_DIGIT_VALUE;
         } else {
-            return data.charAt(index) - MIN_DIGIT_VALUE;
+            return data.charAt(this.length-index-1) - MIN_DIGIT_VALUE;
         }
     }
 
@@ -51,5 +51,9 @@ public class SimpleString implements Numerical<SimpleString> {
     @Override
     public int compareTo(SimpleString anotherSimpleString) {
         return data.compareTo(anotherSimpleString.data);
+    }
+
+    public String getData(){
+        return this.data;
     }
 }

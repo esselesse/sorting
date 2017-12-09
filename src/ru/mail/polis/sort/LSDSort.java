@@ -6,6 +6,7 @@ import java.util.Arrays;
 import ru.mail.polis.structures.IntKeyStringValueObject;
 import ru.mail.polis.structures.Numerical;
 import ru.mail.polis.structures.SimpleInteger;
+import ru.mail.polis.structures.SimpleString;
 
 /**
  * Created by Nechaev Mikhail
@@ -26,6 +27,7 @@ public class LSDSort<T extends Numerical> implements Sort<T> {
                 digitCount = array[i].getDigitCount();
             }
         }
+
         for (int i = 0; i < digitCount; i++) {
             int[] count = new int[maxDigit];
             for (int j = 0; j < array.length; j++) {
@@ -43,12 +45,23 @@ public class LSDSort<T extends Numerical> implements Sort<T> {
         }
     }
 
-
     public static void main(String[] args) {
         System.out.println(LSDSort.class.getSimpleName());
         SimpleInteger[] arr = SortUtils.generateSimpleIntegerArray(10);
         System.out.println(Arrays.toString(arr));
         new LSDSort<>().sort(arr);
         System.out.println(Arrays.toString(arr));
+
+        System.out.println(LSDSort.class.getSimpleName());
+        SimpleString[] arr1 = SortUtils.generateSimpleStringArray(10);
+        for (SimpleString s: arr1) {
+            System.out.print(s.getData()+" ");
+        }
+        new LSDSort<>().sort(arr1);
+        System.out.println();
+        for (SimpleString s: arr1) {
+            System.out.print(s.getData()+" ");
+        }
+
     }
 }

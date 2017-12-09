@@ -3,8 +3,10 @@ package ru.mail.polis.sort.valid;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.stream.IntStream;
 
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestRule;
@@ -13,11 +15,19 @@ import org.junit.runner.Description;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import ru.mail.polis.sort.AbstractSortOnComparisons;
 import ru.mail.polis.sort.BubbleSort;
 import ru.mail.polis.sort.SortUtils;
 
+import ru.mail.polis.sort.*;
+
+
 @RunWith(value = Parameterized.class)
 public class Tester {
+
+    private static AbstractSortOnComparisons<Integer> quickSort;
+    private static AbstractSortOnComparisons<Integer> quickSortTriple;
+    private static AbstractSortOnComparisons<Integer> heapSort;
 
     @Rule
     public TestRule watcher = new TestWatcher() {
@@ -46,11 +56,36 @@ public class Tester {
         });
     }
 
-
+    @BeforeClass //Перед всеми запусками тестов - should be static
+    public static void init() {
+        quickSort = new QuickSort<Integer>();
+        quickSortTriple = new QuickSortTriple<Integer>();
+        heapSort = new HeapSort<Integer>();
+    }
 
     @Test
     public void test01_checkBubbleSort() throws IOException {
         Assert.assertTrue(SortUtils.isArraySorted(BubbleSort.sort(array)));
     }
 
+    @Test
+    public void test02_checkQuickSort() throws IOException {
+        Integer[] arr = IntStream.of(array).boxed().toArray(Integer[]::new);
+        quickSort.sort(arr);
+        Assert.assertTrue(SortUtils.isArraySorted(arr));
+    }
+
+    @Test
+    public void test03_checkQuickSortTriple() {
+        Integer[] arr = IntStream.of(array).boxed().toArray(Integer[]::new);
+        quickSortTriple.sort(arr);
+        Assert.assertTrue(SortUtils.isArraySorted(arr));
+    }
+
+    @Test
+    public void test04_checkHeapSort() {
+        Integer[] arr = IntStream.of(array).boxed().toArray(Integer[]::new);
+        heapSort.sort(arr);
+        Assert.assertTrue(SortUtils.isArraySorted(arr));
+    }
 }

@@ -7,6 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import ru.mail.polis.structures.IntKeyObject;
 import ru.mail.polis.structures.IntKeyStringValueObject;
 import ru.mail.polis.structures.SimpleInteger;
+import ru.mail.polis.structures.SimpleString;
 
 public class SortUtils {
 
@@ -54,6 +55,23 @@ public class SortUtils {
         }
         return a;
     }
+
+    public static SimpleString[] generateSimpleStringArray(int n) {
+        SimpleString[] a = new SimpleString[n];
+        int stringLength = 1 + r.nextInt(n);
+        for (int j = 0; j < n; j++) {
+            String tempStr = "";
+            for (int i = 1; i <= stringLength; i++) {
+                int chr = 97 + r.nextInt(122 - 97);
+                tempStr = tempStr.concat("" + (char) chr);
+            }
+            a[j] = new SimpleString(tempStr);
+        }
+        return a;
+    }
+
+
+
 
     public static Integer[] generateWrappedIntegerArray(int n) {
         Integer[] array = new Integer[n];
